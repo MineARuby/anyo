@@ -27,6 +27,20 @@
         </li>
       <% else %>
         <li class="nav-item">
+          <% if session[:lg].nil? || session[:lg] == 'fr' %>
+            <%= form_tag(language_path('en'), method: :put) do %>
+              <%= submit_tag 'EN' %>
+            <% end %>
+          <% else %>
+            <%= form_tag(language_path('fr'), method: :put) do %>
+              <%= submit_tag 'FR' %>
+            <% end %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to I18n.t('parameters'), parameters_path %>
+        </li>
+        <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>
         </li>
       <% end %>

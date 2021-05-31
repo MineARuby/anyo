@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <%= form_tag parameters_path do %>
+      <div class="input-group mt-3 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><%= I18n.t('white') %> <%= I18n.t('sensitivity') %></span>
+        </div>
+        <input name='wsensi' value="<%= session[:white_sensi] %>" type="number" min="0" step="1" class="form-control" placeholder="<%= session[:white_sensi] %>" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon2"><%= I18n.t('black') %> <%= I18n.t('sensitivity') %></span>
+        </div>
+        <input name='bsensi' value="<%= session[:black_sensi] %>" type="number" min="0" step="1" class="form-control" placeholder="<%= session[:black_sensi] %>" aria-label="Username" aria-describedby="basic-addon2">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3"><%= I18n.t('accuracy_needed') %></span>
+        </div>
+        <input name='accuracy' value="<%= session[:accuracy] %>" type="number" min="0" step="1" class="form-control" placeholder="<%= session[:accuracy] %>" aria-label="Username" aria-describedby="basic-addon3">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon4"><%= I18n.t('depth') %></span>
+        </div>
+        <input name='depth' value="<%= session[:depth] %>" type="number" min="0" step="1" class="form-control" placeholder="<%= session[:depth] %>" aria-label="Username" aria-describedby="basic-addon4">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input name='play_w' type="checkbox" aria-label="Checkbox for following text input" checked="<%= session[:play_white] == 'yes' %>">
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= I18n.t('play_as_white') %>">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input name='play_b' type="checkbox" aria-label="Checkbox for following text input" checked="<%= session[:play_black] == 'yes' %>">
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= I18n.t('play_as_black') %>">
+      </div>
+      <div class="mb-3">
+        <%= I18n.t('openings') %>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" aria-label="Checkbox for following text input" checked="<%= session[:all_openings] == 'yes' %>">
+          </div>
+        </div>
+        <input name='all_ops' type="text" class="form-control" aria-label="Text input with checkbox" value="<%= I18n.t('all') %>">
+      </div>
+      <% Opening.all.each do |op| %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input name="opening_ids[<%= op.id %>]" id="<%= op.id.to_s %>" type="checkbox" aria-label="Checkbox for following text input" checked="<%= session[op[:session_name].to_sym] == 'yes' %>">
+            </div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= I18n.t(op[:i18n_name]) %>">
+        </div>
+      <% end %>
+      <div class='mb-3'>
+        <%= submit_tag I18n.t('validate'), class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
