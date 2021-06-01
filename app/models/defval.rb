@@ -1,0 +1,2 @@
+class Defval < ApplicationRecord
+end

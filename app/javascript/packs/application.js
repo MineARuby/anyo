@@ -26,9 +26,11 @@ require("channels")
 import "bootstrap";
 
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+import { load_engine } from '../../../node_modules/stockfish/load_engine';
+import { execute_stockfish } from './stockfish_browser';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  // initSelect2();
+  execute_stockfish();
+
 });

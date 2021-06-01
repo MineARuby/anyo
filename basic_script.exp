@@ -1,0 +1,8 @@
+spawn node "../anyo/node_modules/stockfish/src/stockfish.js"
+expect -re "(.*)\n"
+send "uci\r"
+expect -re "(.*uciok.*)\n"
+send "position startpos moves $variation\r"
+send "go depth $depth\r"
+expect -re "(.*estmove.*)\n"
+puts "finished"
