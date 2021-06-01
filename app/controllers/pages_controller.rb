@@ -39,14 +39,20 @@ class PagesController < ApplicationController
     # IO.copy_stream("basic_script.exp", "copied_script.exp")
     str = "set depth 17\n"
     str += 'set variation "e2e4 e7e6 g1f3 b8c6"' + "\n"
+    puts "pwd"
+    system("pwd")
     file_data = File.open("basic_script.exp").read
     str += file_data
     puts "NEW STR"
     puts str
+    puts "pwd"
+    system("pwd")
     File.open("copied_script.exp", "w") do |f|
       f.write(str)
     end
-    fork { exec("copied_script.exp") }
+    puts "pwd"
+    system("pwd")
+    fork { exec("../../copied_script.exp") }
     # IO.pipe do |read_pipe, write_pipe|
     #   system("expect", "copied_script.exp", out: write_pipe) }
     #   write_pipe.close
