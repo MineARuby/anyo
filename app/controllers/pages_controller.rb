@@ -39,22 +39,10 @@ class PagesController < ApplicationController
     # IO.copy_stream("basic_script.exp", "copied_script.exp")
     str = "set depth 17\n"
     str += 'set variation "e2e4 e7e6 g1f3 b8c6"' + "\n"
-    puts "pwd"
-    system("pwd")
-    puts "ls -lah"
-    system("ls -lah")
-    puts "cd .."
-    system("cd ..")
-    puts "pwd"
-    system("pwd")
-    puts "ls -lah"
-    system("ls -lah")
-    puts "cd .."
-    system("cd ..")
-    puts "pwd"
-    system("pwd")
-    puts "ls -lah"
-    system("ls -lah")
+    # puts "pwd"
+    # system("pwd")
+    # puts "ls -lah"
+    # system("ls -lah")
     file_data = File.open("bin/basic_script3.exp").read
     str += file_data
     # puts "NEW STR"
