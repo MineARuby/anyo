@@ -46,7 +46,7 @@ class PagesController < ApplicationController
     File.open("copied_script.exp", "w") do |f|
       f.write(str)
     end
-    system("expect", "copied_script.exp")
+    fork { exec("copied_script.exp") }
     # IO.pipe do |read_pipe, write_pipe|
     #   system("expect", "copied_script.exp", out: write_pipe) }
     #   write_pipe.close
