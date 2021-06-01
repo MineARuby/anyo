@@ -1,5 +1,5 @@
 expect <<END
-spawn node "../../node_modules/stockfish/src/stockfish.js"
+spawn node "../node_modules/stockfish/src/stockfish.js"
 expect -re "(.*)\n"
 send "uci\r"
 expect -re "(.*uciok.*)\n"

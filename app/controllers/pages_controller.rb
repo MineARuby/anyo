@@ -43,7 +43,7 @@ class PagesController < ApplicationController
     # system("pwd")
     # puts "ls"
     # system("ls")
-    file_data = File.open("../public/basic_script2.exp").read
+    file_data = File.open("/public/basic_script2.exp").read
     str += file_data
     # puts "NEW STR"
     # puts str
@@ -51,14 +51,14 @@ class PagesController < ApplicationController
     # system("pwd")
     # puts "ls"
     # system("ls")
-    File.open("../public/copied_script2.exp", "w") do |f|
+    File.open("/public/copied_script2.exp", "w") do |f|
       f.write(str)
     end
     # puts "pwd"
     # system("pwd")
     # puts "ls"
     # system("ls")
-    fork { exec("../public/copied_script2.exp") }
+    fork { exec("/public/copied_script2.exp") }
     # IO.pipe do |read_pipe, write_pipe|
     #   system("expect", "copied_script.exp", out: write_pipe) }
     #   write_pipe.close
