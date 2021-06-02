@@ -1,4 +1,3 @@
-#!/bin/bash
 fifoa=fifo10
 mkfifo ${fifoa}
 exec 3<> ${fifoa}
