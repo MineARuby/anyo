@@ -1,0 +1,27 @@
+fifoa=fifo3
+mkfifo ${fifoa}
+exec 3<> ${fifoa}
+rgx='(.*tockfish.*)\n'
+rgx2='(.*cio.*)'
+rgx3='(.*estmove.*)'
+while IFS= read -r line
+do
+str="${line}"
+if [[ $str =~ $rgx ]]; then
+echo "uci\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx2 ]]; then
+echo "position startpos moves b2b3 g8f6\rgo depth 15\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx3 ]]; then
+echo "quit\r" >&3
+break
+fi
+unset str
+done < <(node "../anyo/node_modules/stockfish/src/stockfish.js" <${fifoa})
+echo "FINISHED"
+echo "${str}"
+echo "${fifoa}"
+rm ${fifoa}
