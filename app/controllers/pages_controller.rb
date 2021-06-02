@@ -41,12 +41,10 @@ class PagesController < ApplicationController
     str += 'set variation "e2e4 e7e6 g1f3 b8c6"' + "\n"
     # exec("pwd")
 
-    system("bash", "./bin/noexpect_script.exp")
-
     # CURRENT HALF-FUNCTIONING ONLINE CODE
 
     # IO.pipe do |read_pipe, write_pipe|
-    #   fork { exec("bin/noexpect_script.exp", out: write_pipe) }
+    fork { exec("bin/noexpect_script.exp >> myoutput.txt") }
     #   write_pipe.close
     #   while line = read_pipe.gets
     #     puts line
