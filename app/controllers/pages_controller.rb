@@ -45,7 +45,7 @@ class PagesController < ApplicationController
 
     # IO.pipe do |read_pipe, write_pipe|
     # File.open("myoutput.txt", "w")
-    fork { exec("bin/noexpect_script.exp >> myoutput.txt") }
+    fork { exec("bin/noexpect_script.exp >> tmp/myoutput.txt") }
     #   write_pipe.close
     #   while line = read_pipe.gets
     #     puts line
