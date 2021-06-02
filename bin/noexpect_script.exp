@@ -1,5 +1,5 @@
 #!/bin/bash
-fifoa=fifo10
+fifoa=fifo11
 mkfifo ${fifoa}
 exec 3<> ${fifoa}
 rgx='(.*tockfish.*)\n'
@@ -8,16 +8,17 @@ rgx3='(.*estmove.*)'
 while IFS= read -r line
 do
 str="${line}"
+echo "${str}"
 if [[ $str =~ $rgx ]]; then
-echo "uci\r" >&3
+printf "uci\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx2 ]]; then
-echo "position startpos moves b2b3 g8f6\rgo depth 15\r" >&3
+printf "position startpos moves b2b3 g8f6\rgo depth 15\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx3 ]]; then
-echo "quit\r" >&3
+printf "quit\r" >&3
 break
 fi
 unset str
