@@ -1,4 +1,5 @@
-fifoa=fifo3
+#!/bin/bash
+fifoa=fifo8
 mkfifo ${fifoa}
 exec 3<> ${fifoa}
 rgx='(.*tockfish.*)\n'
