@@ -44,7 +44,7 @@ class PagesController < ApplicationController
     # CURRENT HALF-FUNCTIONING ONLINE CODE
 
     # IO.pipe do |read_pipe, write_pipe|
-    File.open("myoutput.txt", "w")
+    # File.open("myoutput.txt", "w")
     fork { exec("bin/noexpect_script.exp >> myoutput.txt") }
     #   write_pipe.close
     #   while line = read_pipe.gets
