@@ -21,7 +21,7 @@ echo "quit\r" >&3
 break
 fi
 unset str
-done < <(node "../node_modules/stockfish/src/stockfish.js" <${fifoa})
+done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
 echo "FINISHED"
 echo "${str}"
 echo "${fifoa}"
