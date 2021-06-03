@@ -8,8 +8,9 @@ class Api::V1::DepthevalsController < Api::V1::BaseController
     f = File.open(@file_name)
     puts "output after theoretical emptying"
     puts f.read
-    @depth = ApplicationController::check_integer(params[:depth], "depth")
-    @moves = ApplicationController::check_moves(params[:moves], "moves")
+    api_err = ApiErrorHandling.new
+    @depth = api_err.check_integer(params[:depth], "depth")
+    @moves = api_err.check_moves(params[:moves], "moves")
     if !@depth[:error].nil?
       render json: { error: @depth[:error] }, status: 400
     elsif !@moves[:error].nil?
