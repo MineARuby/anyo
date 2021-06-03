@@ -27,10 +27,11 @@ class Api::V1::DepthevalsController < Api::V1::BaseController
     Process.waitpid(pid, 0)
     f = File.open(@file_name)
     puts "displaying output ?"
-    puts f.read
+    content = f.read
+    puts content
     @end_time = Time.now.to_f
     puts "benchmark : #{@end_time - @start_time}"
     bmark = @end_time - @start_time
-    render json: { content: f.read, benchmark: bmark }, status: 200
+    render json: { content: content, benchmark: bmark }, status: 200
   end
 end
