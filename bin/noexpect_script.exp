@@ -5,9 +5,13 @@ exec 3<> ${fifoa}
 rgx='(.*tockfish.*)\n'
 rgx2='(.*cio.*)'
 rgx3='(.*estmove.*)'
+rgx4="(.*nfo depth $1.*)"
 while IFS= read -r line
 do
 str="${line}"
+if [[ $str =~ $rgx4 ]]; then
+prev=$str
+fi
 if [[ $str =~ $rgx ]]; then
 printf "uci\r" >&3
 unset str
@@ -23,4 +27,5 @@ fi
 done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
 echo "FINISHED"
 echo "${str}"
+echo "${prev}"
 rm ${fifoa}

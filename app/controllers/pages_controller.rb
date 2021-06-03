@@ -35,7 +35,6 @@ class PagesController < ApplicationController
     session[:philidor] = 'yes'
     session[:scandinavian] = 'yes'
     session[:h_openings] = {}
-    start = Time.now.to_f
     # IO.copy_stream("basic_script.exp", "copied_script.exp")
     # str = "set depth 17\n"
     # str += 'set variation "e2e4 e7e6 g1f3 b8c6"' + "\n"
@@ -45,17 +44,6 @@ class PagesController < ApplicationController
 
     # IO.pipe do |read_pipe, write_pipe|
     # File.open("myoutput.txt", "w")
-    File.open("tmp/myoutput.txt", "w") do |fl|
-      fl.write("")
-    end
-    f = File.open("tmp/myoutput.txt")
-    puts "output after theoretical emptying"
-    puts f.read
-    pid = fork { exec("bin/noexpect_script.exp 22 'b2b3 g8f6' > tmp/myoutput.txt") }
-    Process.waitpid(pid, 0)
-    f = File.open("tmp/myoutput.txt")
-    puts "displaying output ?"
-    puts f.read
     #   write_pipe.close
     #   while line = read_pipe.gets
     #     puts line
@@ -98,7 +86,5 @@ class PagesController < ApplicationController
     #     puts line
     #   end
     # end
-    end_time = Time.now.to_f
-    puts "benchmark : #{end_time - start}"
   end
 end
