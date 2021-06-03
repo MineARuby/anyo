@@ -1,6 +1,4 @@
 class Api::V1::BaseController < ActionController::API
-  skip_before_action :authenticate_user!, only: [ :check_moves, :check_integer ]
-
   def check_integer(param_to_check, name_of_arg)
     res = {}
     if param_to_check.nil?

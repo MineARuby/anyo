@@ -1,6 +1,4 @@
 class Api::V1::DepthevalsController < Api::V1::BaseController
-  skip_before_action :authenticate_user!, only: [ :index ]
-
   def index
     @start_time = Time.now.to_f
     @file_name = "tmp/a" + SecureRandom.hex(10) + ".txt"
