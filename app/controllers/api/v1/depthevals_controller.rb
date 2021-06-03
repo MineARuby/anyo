@@ -9,7 +9,7 @@ class Api::V1::DepthevalsController < Api::V1::BaseController
     puts "output after theoretical emptying"
     puts f.read
     api_err = ApiErrorHandling.new
-    @depth = api_err.check_integer(params[:depth], "depth")
+    @depth = api_err.check_integer(params[:depth], "depth", 1, 20)
     @moves = api_err.check_moves(params[:moves], "moves")
     if !@depth[:error].nil?
       render json: { error: @depth[:error] }, status: 400
