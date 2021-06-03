@@ -2,10 +2,10 @@ class Api::V1::DepthevalsController < Api::V1::BaseController
   def index
     @start_time = Time.now.to_f
     @file_name = "tmp/a" + SecureRandom.hex(10) + ".txt"
-    File.open(@filename, "w") do |fl|
+    File.open(@file_name, "w") do |fl|
       fl.write("")
     end
-    f = File.open(@filename)
+    f = File.open(@file_name)
     puts "output after theoretical emptying"
     puts f.read
     @depth = API::V1::BaseController::check_integer(params[:depth], "depth")
