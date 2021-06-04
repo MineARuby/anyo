@@ -1,0 +1,29 @@
+#!/bin/bash
+fifoa=fifo12
+mkfifo ${fifoa}
+exec 3<> ${fifoa}
+rgx='(.*tockfish.*)\n'
+rgx2='(.*cio.*)'
+rgx3='(.*estmove.*)'
+str=""
+while IFS= read -r line
+do
+prev=$str
+str="${line}"
+if [[ $str =~ $rgx ]]; then
+printf "uci\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx2 ]]; then
+printf "position startpos moves $2\rgo movetime $1\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx3 ]]; then
+printf "quit\r" >&3
+break
+fi
+done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
+echo "FINISHED"
+echo "${str}"
+echo "${prev}"
+rm ${fifoa}
