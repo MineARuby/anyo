@@ -10,14 +10,10 @@ class Api::V1::FenmvtimesController < Api::V1::BaseController
     # puts f.read
     api_err = ApiErrorHandling.new
     @mvtime = api_err.check_integer(params[:mvtime], "mvtime", 1, 8000)
-    @param_moves = params[:moves]
-    @moves = api_err.check_moves(params[:moves], "moves")
     @param_fen = params[:fen]
     @fen = api_err.check_fen(@param_fen, "fen")
     if !@mvtime[:error].nil?
       render json: { error: @mvtime[:error] }, status: 400
-    elsif !@moves[:error].nil?
-      render json: { error: @moves[:error] }, status: 400
     elsif !@fen[:error].nil?
       render json: { error: @fen[:error] }, status: 400
     else
@@ -28,7 +24,7 @@ class Api::V1::FenmvtimesController < Api::V1::BaseController
   private
 
   def deal_with_script
-    pid = fork { exec("bin/fenmvtime_script.exp #{@mvtime[:value]} #{@moves[:value]} #{@fen[:value]} > #{@file_name}") }
+    pid = fork { exec("bin/fenmvtime_script.exp #{@mvtime[:value]} #{@fen[:value]} > #{@file_name}") }
     Process.waitpid(pid, 0)
     f = File.open(@file_name)
     # puts "displaying output ?"
