@@ -21,6 +21,8 @@ class Api::V1::FendepthevalsController < Api::V1::BaseController
     elsif !@fen[:error].nil?
       render json: { error: @fen[:error] }, status: 400
     else
+      puts "index"
+      puts @fen[:value]
       deal_with_script
     end
   end
@@ -28,11 +30,13 @@ class Api::V1::FendepthevalsController < Api::V1::BaseController
   private
 
   def deal_with_script
+    puts "deal with script"
     pid = fork { exec("bin/feneval_script.exp #{@depth[:value]} #{@moves[:value]} #{@fen[:value]} > #{@file_name}") }
     Process.waitpid(pid, 0)
     f = File.open(@file_name)
     # puts "displaying output ?"
     content = f.read
+    puts content
     ct_array = content.split("INISHED")[1].split("EVALPART")
     bestmv_ct = ct_array[0].split("estmove ")[1].split("ponder ")
     bestmv = bestmv_ct[0]
