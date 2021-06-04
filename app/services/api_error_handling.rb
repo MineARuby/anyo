@@ -19,7 +19,7 @@ class ApiErrorHandling
         else
           fen_pos_array.each_with_index do |rk, i|
             rank_length = 0
-            ln.each_char do |c|
+            rk.each_char do |c|
               if !all_pieces.include?(c)
                 if c.ord < 49 || c.ord > 56
                   res[:error] = "SyntaxError (Malformed FEN), rank number #{i + 1} hold a character that is neither an integer between 1 and 8, nor describing a piece (R, K, Q, B, N, P, r, k, q, b, n, p)"
