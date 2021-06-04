@@ -6,10 +6,15 @@ rgx='(.*tockfish.*)\n'
 rgx2='(.*cio.*)'
 rgx3='(.*estmove.*)'
 str=""
+maxval=0
 while IFS= read -r line
 do
-prev=$str
 str="${line}"
+IFS=' ' read -a array <<< "$str"
+currval=${array[2]}
+if [[ $currval -gt $maxval ]]; then
+prev=$str
+fi
 if [[ $str =~ $rgx ]]; then
 printf "uci\r" >&3
 unset str
@@ -20,7 +25,6 @@ unset str
 fi
 if [[ $str =~ $rgx3 ]]; then
 printf "quit\r" >&3
-echo "${prev}"
 break
 fi
 done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
