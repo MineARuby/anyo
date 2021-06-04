@@ -20,6 +20,7 @@ unset str
 fi
 if [[ $str =~ $rgx3 ]]; then
 printf "quit\r" >&3
+echo "${prev}"
 break
 fi
 done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
