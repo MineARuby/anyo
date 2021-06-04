@@ -11,7 +11,7 @@ class Api::V1::MvtimesController < Api::V1::BaseController
     api_err = ApiErrorHandling.new
     @mvtime = api_err.check_integer(params[:mvtime], "mvtime", 1, 8000)
     @moves = api_err.check_moves(params[:moves], "moves")
-    if !@depth[:error].nil?
+    if !@mvtime[:error].nil?
       render json: { error: @mvtime[:error] }, status: 400
     elsif !@moves[:error].nil?
       render json: { error: @moves[:error] }, status: 400
