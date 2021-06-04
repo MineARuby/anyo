@@ -6,6 +6,8 @@ rgx='(.*tockfish.*)\n'
 rgx2='(.*cio.*)'
 rgx3='(.*estmove.*)'
 rgx4="(.*nfo depth $1.*)"
+echo "$3"
+echo $1
 while IFS= read -r line
 do
 str="${line}"
@@ -17,7 +19,7 @@ printf "uci\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx2 ]]; then
-printf "position fen $3 moves $2\rgo depth $1\r" >&3
+printf "position fen $3\rgo depth $1\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx3 ]]; then
