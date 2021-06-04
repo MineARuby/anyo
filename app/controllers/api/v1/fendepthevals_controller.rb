@@ -32,7 +32,7 @@ class Api::V1::FendepthevalsController < Api::V1::BaseController
   def deal_with_script
     puts "deal with script"
     puts @fen[:value]
-    pid = fork { exec("bin/feneval_script.exp #{@depth[:value]} #{@fen[:value]} > #{@file_name}") }
+    pid = fork { exec("bin/feneval_script.exp #{@depth[:value]} #{@fen[:value]} #{@moves[:value]} > #{@file_name}") }
     Process.waitpid(pid, 0)
     f = File.open(@file_name)
     # puts "displaying output ?"
