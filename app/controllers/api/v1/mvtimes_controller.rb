@@ -37,6 +37,6 @@ class Api::V1::MvtimesController < Api::V1::BaseController
     @end_time = Time.now.to_f
     # puts "benchmark : #{@end_time - @start_time}"
     bmark = @end_time - @start_time
-    render json: { pv: variation, cp_score: cpscore, benchmark: bmark }, status: 200
+    render json: { pv: variation_ct, cp_score: cpscore, benchmark: bmark }, status: 200
   end
 end
