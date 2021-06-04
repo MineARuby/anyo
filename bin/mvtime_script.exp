@@ -30,5 +30,6 @@ fi
 done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
 echo "FINISHED"
 echo "${str}"
+echo "EVALPART"
 echo "${prev}"
 rm ${fifoa}
