@@ -1,0 +1,35 @@
+#!/bin/bash
+fifoa=fifo12
+mkfifo ${fifoa}
+exec 3<> ${fifoa}
+rgx='(.*tockfish.*)\n'
+rgx2='(.*cio.*)'
+rgx3='(.*estmove.*)'
+str=""
+maxval=0
+while IFS= read -r line
+do
+str="${line}"
+IFS=' ' read -a array <<< "$str"
+currval=${array[2]}
+if [[ $currval -gt $maxval ]]; then
+prev=$str
+fi
+if [[ $str =~ $rgx ]]; then
+printf "uci\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx2 ]]; then
+printf "position position fen $3 moves $2\rgo movetime $1\r" >&3
+unset str
+fi
+if [[ $str =~ $rgx3 ]]; then
+printf "quit\r" >&3
+break
+fi
+done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
+echo "FINISHED"
+echo "${str}"
+echo "EVALPART"
+echo "${prev}"
+rm ${fifoa}
