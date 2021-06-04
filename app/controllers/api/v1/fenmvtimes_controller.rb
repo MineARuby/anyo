@@ -24,7 +24,7 @@ class Api::V1::FenmvtimesController < Api::V1::BaseController
   private
 
   def deal_with_script
-    pid = fork { exec("bin/fenmvtime_script.exp #{@mvtime[:value]} #{@fen[:value]} > #{@file_name}") }
+    pid = fork { exec("bin/fenmvtime_script.exp #{@mvtime[:value]} '" + @fen[:value].to_s + "' > #{@file_name}") }
     Process.waitpid(pid, 0)
     f = File.open(@file_name)
     # puts "displaying output ?"

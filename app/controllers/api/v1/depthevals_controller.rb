@@ -29,7 +29,6 @@ class Api::V1::DepthevalsController < Api::V1::BaseController
     f = File.open(@file_name)
     # puts "displaying output ?"
     content = f.read
-    puts content
     ct_array = content.split("INISHED")[1].split("EVALPART")
     bestmv_ct = ct_array[0].split("estmove ")[1].split("ponder ")
     bestmv = bestmv_ct[0]

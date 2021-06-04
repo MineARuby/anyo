@@ -6,14 +6,6 @@ rgx='(.*tockfish.*)\n'
 rgx2='(.*cio.*)'
 rgx3='(.*estmove.*)'
 rgx4="(.*nfo depth $1.*)"
-echo $1
-echo "$1"
-echo $2
-echo "$2"
-echo $3
-echo "$3"
-echo $4
-echo "$4"
 while IFS= read -r line
 do
 str="${line}"
