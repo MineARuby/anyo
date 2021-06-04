@@ -20,7 +20,7 @@ printf "uci\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx2 ]]; then
-printf "position position fen $3 moves $2\rgo movetime $1\r" >&3
+printf "position position fen $2 moves $3\rgo movetime $1\r" >&3
 unset str
 fi
 if [[ $str =~ $rgx3 ]]; then

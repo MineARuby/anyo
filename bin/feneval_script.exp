@@ -1,7 +1,7 @@
 #!/bin/bash
 fifoa=fifo13
 mkfifo ${fifoa}
-exec 3<> ${fifoa}
+exec 4<> ${fifoa}
 rgx='(.*tockfish.*)\n'
 rgx2='(.*cio.*)'
 rgx3='(.*estmove.*)'
@@ -17,15 +17,15 @@ if [[ $str =~ $rgx4 ]]; then
 prev=$str
 fi
 if [[ $str =~ $rgx ]]; then
-printf "uci\r" >&3
+printf "uci\r" >&4
 unset str
 fi
 if [[ $str =~ $rgx2 ]]; then
-printf "position fen $2 moves $3\rgo depth $1\r" >&3
+printf "position fen $2 moves $3\rgo depth $1\r" >&4
 unset str
 fi
 if [[ $str =~ $rgx3 ]]; then
-printf "quit\r" >&3
+printf "quit\r" >&4
 break
 fi
 done < <(node "node_modules/stockfish/src/stockfish.js" <${fifoa})
