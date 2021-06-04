@@ -102,9 +102,9 @@ class ApiErrorHandling
     elsif param_to_check.to_i.zero?
       res[:error] = "SyntaxError, #{name_of_arg} parameter should be an integer"
     elsif param_to_check.to_i < minimum
-      res[:error] = "OutOfRangeError, #{name_of_arg} parameter should higher than #{minimum}"
+      res[:error] = "OutOfRangeError, #{name_of_arg} parameter should be higher than #{minimum - 1}"
     elsif param_to_check.to_i > maximum
-      res[:error] = "OutOfRangeError, #{name_of_arg} parameter should lower than #{maximum}"
+      res[:error] = "OutOfRangeError, #{name_of_arg} parameter should be lower than #{maximum + 1}"
     else
       res[:error] = nil
       res[:value] = param_to_check.to_i
